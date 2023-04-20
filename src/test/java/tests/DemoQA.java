@@ -48,11 +48,9 @@ public class DemoQA {
         /*******Select Value**********/
 
        WebElement value = driver.findElement(By.xpath("//div[@id='withOptGroup']/div/div"));
-        value.click();
-        Thread.sleep(1000);
-        WebDriverWait value_time = new WebDriverWait(driver, Duration.ofSeconds(2));
-
-        select_multipl(r.nextInt(6));
+       value.click();
+       Thread.sleep(1000);
+       WebDriverWait value_time = new WebDriverWait(driver, Duration.ofSeconds(2));
 
         switch (r.nextInt(6)){
             case 0:
@@ -77,24 +75,27 @@ public class DemoQA {
 
        /********** Select One *********************/
 
-        WebElement one = driver.findElement(By.xpath("//div[@id='selectOne']/div/div"));
+       /* WebElement one = driver.findElement(By.xpath("//div[@id='selectOne']/div/div"));
         one.click();
         Thread.sleep(1000);
         WebDriverWait one_time = new WebDriverWait(driver, Duration.ofSeconds(2));
         one_time.until(ExpectedConditions.elementToBeClickable(By.id("react-select-3-option-0-2"))).click();
+        */
 
-
-
+        WebElement two = driver.findElement(By.xpath("//div[@id='selectOne']"));
+        two.click();
+        two.findElement(By.xpath("//div[@id='react-select-3-option-0-4']")).click();
 
 
 
 
         /*******************************************************/
 
+
         /******** Old Select Menu *************/
-        //Select listaEjemplo = new Select(driver.findElement(By.xpath("//select[@id='oldSelectMenu']")));
-        //int prueba = r.nextInt(11);
-        //listaEjemplo.selectByIndex(prueba);
+        Select listaEjemplo = new Select(driver.findElement(By.xpath("//select[@id='oldSelectMenu']")));
+        int index = r.nextInt(11);
+        listaEjemplo.selectByIndex(index);
         //listaEjemplo.selectByVisibleText("Black");
         //listaEjemplo.selectByValue("10");
 
@@ -110,19 +111,18 @@ public class DemoQA {
 
         /*******Multiselect drop down******/
 
-       /* WebElement listaMultiple = driver.findElement(By.xpath("//div[@id='selectMenuContainer']/div[7]/div/div/div"));
-        listaMultiple.click();
-        //WebDriverWait waiting_time = new WebDriverWait(driver, Duration.ofSeconds(20));
-        //waiting_time.until(ExpectedConditions.elementToBeSelected(By.id("")));
-            */
+       WebElement listaMultiple = driver.findElement(By.xpath("//div[@id='selectMenuContainer']/div[7]/div/div/div/div"));
+       listaMultiple.click();
+       listaMultiple.findElement(By.xpath("//div[@id='react-select-4-option-3']")).click();
+       Thread.sleep(1000);
+       listaMultiple.findElement(By.xpath("//div[@id='react-select-4-option-0']")).click();
+        Thread.sleep(1000);
+       listaMultiple.findElement(By.xpath("//div[@id='react-select-4-option-1']")).click();
 
 
+       /*******Standard multi select******/
 
-
-
-        /*******Standard multi select******/
-
-       /* Select oldMulti = new Select(driver.findElement(By.xpath("//select[@id='cars']")));
+       Select oldMulti = new Select(driver.findElement(By.xpath("//select[@id='cars']")));
         List<WebElement> options = oldMulti.getOptions();
         for(WebElement e:options){
             opc.add(e.getText());
@@ -140,7 +140,7 @@ public class DemoQA {
             System.out.println("multi-select option");
         }
 
-        */
+
     }
 
    /* @After
@@ -151,9 +151,7 @@ public class DemoQA {
 
 
 */
-   public void select_multipl(int n){
 
-   }
 }
 
 
