@@ -3,6 +3,7 @@ package tests;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -36,11 +37,11 @@ public class AutoCompleteQA {
     @Test
     public void auto_complete() throws InterruptedException {
 
-        WebElement auto = driver.findElement(By.xpath("//div[@id='autoCompleteMultipleContainer']/div/div"));
-        auto.click();
-        auto.sendKeys("Red");
 
-
+        WebElement products=driver.findElement(By.xpath("//div[@id='autoCompleteMultipleContainer']/div/div"));
+        products.click();
+        products.sendKeys("Red");
+        products.sendKeys(Keys.TAB);
 
 
 
