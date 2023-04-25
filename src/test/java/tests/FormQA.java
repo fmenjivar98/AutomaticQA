@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Random;
@@ -25,6 +26,7 @@ public class FormQA {
     String key_url = "https://demoqa.com/automation-practice-form";
     Random r = new Random();
 
+    int n = (int) (Math.random() * (4 - 1)) + 1;
 
     ArrayList<String> opc = new ArrayList<String>();
 
@@ -41,8 +43,7 @@ public class FormQA {
     }
 
     @Test
-    public void form()
-    {
+    public void form() throws InterruptedException {
         WebElement first_name = driver.findElement(By.id("firstName"));
         first_name.click();
         first_name.sendKeys("Fernando");
@@ -55,21 +56,9 @@ public class FormQA {
         user_name.click();
         user_name.sendKeys("fernandomenjivar1998@gmail.com");
 
-        switch (r.nextInt(3)){
-            case 0:
-                WebElement male_radio = driver.findElement(By.xpath("//div[@id='genterWrapper']/div[2]/div/label"));
-                male_radio.click();
-                break;
-            case 1:
-                WebElement female_radio = driver.findElement(By.xpath("//div[@id='genterWrapper']/div[2]/div[2]/label"));
-                female_radio.click();
-                break;
-            case 2:
-                WebElement other_radio = driver.findElement(By.xpath("//div[@id='genterWrapper']/div[2]/div[3]/label"));
-                other_radio.click();
-                break;
+        WebElement radio_btn = driver.findElement(By.xpath("//div[@id='genterWrapper']/div[2]/div["+ n +"]/label"));
+        radio_btn.click();
 
-        }
 
         WebElement user_number = driver.findElement(By.id("userNumber"));
         user_number.click();
@@ -98,22 +87,40 @@ public class FormQA {
         products.sendKeys("Ch");
         products.sendKeys(Keys.TAB);
 
-        WebElement sport = driver.findElement(By.xpath("//div[@id='hobbiesWrapper']/div[2]/div/label"));
-        sport.click();
+        for(int i = 1; i <= n; i++)
+        {
+            WebElement hobbies = driver
+                    .findElement(By.xpath("//div[@id='hobbiesWrapper']/div[2]/div["+ i + "]/label"));
+            hobbies.click();
+        }
 
-        WebElement reading = driver.findElement(By.xpath("//div[@id='hobbiesWrapper']/div[2]/div[2]/label"));
-        reading.click();
-
-        WebElement music = driver.findElement(By.xpath("//div[@id='hobbiesWrapper']/div[2]/div[3]/label"));
-        music.click();
 
         WebElement address = driver.findElement(By.id("currentAddress"));
-        address.sendKeys("Pues obvio mi casa que esta al lado de otra casa y de otra cosa");
+        address.sendKeys("Lorem ipsum dolor sit amet consectetur adipisicing elit. " +
+                "Ipsum id obcaecati maxime veritatis libero porro vel sint incidunt quaerat est " +
+                "adipisci pariatur eveniet, eaque perspiciatis " +
+                "nostrum nihil neque atque velit.");
 
-        WebElement state = driver.findElement(By.id("stateCity-wrapper"));
-        state.click();
-        state.findElement(By.cssSelector("#react-select-3-option-2")).click();
+
+
+        File file = new File("C:\\Users\\ferna\\OneDrive\\Documentos\\Open-bootcamp\\03-Imagenes\\static\\imagen.jpg");
+        String path = file.getAbsolutePath();
+        driver.findElement(By.id("uploadPicture")).sendKeys(path);
+
+
+
+        WebElement state = driver.findElement(By.id("react-select-3-input"));
+        state.sendKeys("rajasthan");
+        state.sendKeys(Keys.TAB);
+
+        WebElement city = driver.findElement(By.id("react-select-4-input"));
+        city.sendKeys("Jaiselmer");
+        city.sendKeys(Keys.TAB);
+
+
     }
+
+
 
 
 
